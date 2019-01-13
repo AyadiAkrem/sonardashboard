@@ -13,13 +13,7 @@
           ['EBAS-ap50', 80],
           ['EBAS-ap90', 80]
         ]);
-        var data3 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['GMIA-ap50', 80],
-          ['GMIA-ap90', 80],
-          ['CTIA-ap50', 80],
-          ['CTIA-ap90', 80]
-        ]);
+
          var options = {
           width: 1000, height: 300,
           yellowFrom:35, yellowTo: 50,
@@ -35,12 +29,22 @@
           greenColor:'#239B56'
         };
         var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-        var chart3 = new google.visualization.Gauge(document.getElementsByClassName("gauge")[0]);
+        var s, charts = document.getElementsByClassName("gauge");
+        for (s of charts) {
+          var gaugeChart =  new google.visualization.Gauge(s);
+          var data3 = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['Project', 80]
+            ]);
+            var project = s.getAttribute("project")
+
+            data3.setValue(0, 0, project);
+            gaugeChart.draw(data3,options2)
+        }
 
         chart.draw(data, options);
-        chart2.draw(data2,options2);
-        chart3.draw(data3,options2);
+
+
 
         setInterval(function() {
           data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
