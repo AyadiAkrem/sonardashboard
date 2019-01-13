@@ -1,0 +1,6 @@
+        setInterval(function() {
+          chart.draw(data, options);
+          fetch('/coverage/GMIA-ap50')
+            .then(response => response.json())
+            .then(cov => data.setValue(0, 1, cov));
+             }, 13000);
