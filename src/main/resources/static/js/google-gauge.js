@@ -46,10 +46,12 @@
 
 
 
-        setInterval(function() {
-          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-          chart.draw(data, options);
-        }, 5000);
+                setInterval(function() {
+                  chart.draw(data, options);
+                  fetch('/coverage/simgrid')
+                    .then(response => response.json())
+                    .then(cov => data.setValue(0, 1, cov));
+                     }, 13000);
         setInterval(function() {
           data2.setValue(0, 1, 40 + Math.round(60 * Math.random()));
           data2.setValue(1, 1, 40 + Math.round(60 * Math.random()));
